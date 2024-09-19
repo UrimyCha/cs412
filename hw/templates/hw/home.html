@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Hello, world!</title>
-        <link rel="stylesheet" href="/static/styles.css">
-    </head>
 
-    <body>
+{% extends 'hw/base.html' %}
+
+{% block content %}
         <h1>Hello, world!</h1>
 
         <p>Welcome to our first Django web application!</p>
@@ -15,5 +11,5 @@
         </p>
         <hr>
         This page was generated at {{current_time}}.
-    </body>
-</html>
+
+{% end content %}

@@ -1,0 +1,26 @@
+<!--This is the base page from which all other pages will inhereit
+    put common code here, specific code in other pages -->
+
+
+{% load static %}
+<html>
+    <head>
+        <title>Hello, world!</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    
+    <body>
+        <nav>
+            <ul>
+                <!-- use the scriptlet url function to look up a url by name-->
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+            </ul>
+        </nav>
+        {% block content %}
+
+        {% endblock %}
+        <hr>
+        This page was created at {{current_time}}
+    </body>
+</html>
