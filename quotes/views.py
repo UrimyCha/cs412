@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
-import time
 import random
 
 # Create your views here.
@@ -15,15 +14,24 @@ images = ["https://static.wikia.nocookie.net/hellskitchen/images/6/6f/Gordon_Ram
           "https://hips.hearstapps.com/hmg-prod/images/host-judge-gordon-ramsay-in-the-hells-kitchen-semi-finals-news-photo-1718650477.jpg",
           "https://media.timeout.com/images/105854659/image.jpg"]
 
+
 def quote(request):
     # use this template to render the response
     template_name = 'quotes/quote.html'
 
     # create a dictionary of context variables for the template:
     context = {
-        "current_time" : time.ctime(),
         "quote" : random.choice(quotes),
         "image" : random.choice(images),
+    }
+
+    # delegate rendering work to the template
+    return render(request, template_name, context)
+
+def show_all(request):
+    template_name = 'quotes/show_all.html'
+
+    context = {
         "q1" : quotes[0],
         "q2" : quotes[1],
         "q3" : quotes[2],
@@ -31,6 +39,14 @@ def quote(request):
         "i2" : images[1],
         "i3" : images[2]
     }
-
-    # delegate rendering work to the template
     return render(request, template_name, context)
+
+def about(request):
+    template_name = 'quotes/about.html'
+
+    context = {
+
+    }
+
+    return render(request, template_name, context)
+

@@ -6,10 +6,12 @@
     <html>
         <head>
             <title>Quote of the Day</title>
-            <link rel="stylesheet" href="{% static '/styles.css' %}">
+            <link rel="stylesheet" href="{% static '/quote_styles.css' %}">
         </head>
         
         <body>
+            <h1>Gordon Ramsey's Quote of the Day!</h1>
+            <br>
             <nav>
                 <ul>
                     <!-- use the scriptlet url function to look up a url by name-->
@@ -21,7 +23,6 @@
             {% block content %}
     
             {% endblock %}
-            <hr>
-            This page was generated at {{current_time}}
+
         </body>
     </html>
