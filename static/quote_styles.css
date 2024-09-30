@@ -24,7 +24,6 @@ body{
 
 table, tr, td{
     border-color: darkslategray;
-    border: 1px;
     background-color: rgb(230, 223, 223);
     text-align: left;
     font-family: Arial;

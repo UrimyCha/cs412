@@ -1,0 +1,67 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<h2>Order Menu</h2>
+<form action="/restaurant/confirmation" method="POST">
+    {% csrf_token %}
+
+    <h3>Select your Items:</h3>
+
+    <table>
+        <tr>
+            <td><img src={{krabby_patty}} width="200"> </td>
+            <td><div><input type="checkbox" name="items[]" value="Krabby Patty,5">Krabby Patty - $5</div></td>
+        </tr>
+        <tr>
+            <td><img src={{kelp_shake}} width="200"> </td>
+            <td><div><input type="checkbox" name="items[]" value="Kelp Shake,4">Kelp Shake - $4</div></td>
+        </tr>
+        <tr>
+            <td><img src={{coral_bits}} width="200"> </td>
+            <td>
+                <div>
+                    <input type="checkbox" id="coral_bits" name="items[]" value="Coral Bits,3">Coral Bits - $3</input>
+                    <div id="sauces">
+                        Choose a sauce:
+                        <input type="checkbox" class="mySubCheckBox" name="items[]" value="Ketchup,0">Ketchup</input>
+                        <input type="checkbox" class="mySubCheckBox" name="items[]" value="Mayo,0">Mayo</input>
+                        <input type="checkbox" class="mySubCheckBox" name="items[]" value="Honey Mustard,0">Honey Mustard</input>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><img src={{deluxe}} width="200"> </td>
+            <td><div><input type="checkbox" name="items[]" value="Deluxe Double Krabby Patty,7">Deluxe Double Krabby Patty - $7</div></td>
+        </tr>
+        <tr>
+            <td><img src={{kids_meal}} width="200"> </td>
+            <td><div><input type="checkbox" name="items[]" value="Kids Meal,8">Krabby Kid's Meal - $8</div></td>
+        </tr>
+    </table>    
+    <p>
+        <h3>Try Today's Special! - $8:</h3>
+        <div><input type="checkbox" name="items[]" value="Daily Special,8">{{daily_special}}</div>
+    </p>
+    
+    <p>
+        <h3>Special Instructions</h3>
+        Please share any special instructions:
+        <div><textarea name="special_instructions" rows="3" cols="60"></textarea></div>
+    </p>
+
+    <p>
+        <h3>Contact Information</h3>
+        <div>Name:</div> <div><input type="text" name="name"></div>
+        <div>Phone:</div> <div><input type="text" name="phone"></div>
+        <div>Email:</div> <div><input type="text" name="email"></div>
+    </p>
+
+    <p>
+        <h3>Place your order!</h3>
+        <input type="submit">        
+    </p>
+</form>
+
+
+{% endblock %}

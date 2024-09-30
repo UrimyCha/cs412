@@ -1,0 +1,58 @@
+
+h1 {
+    color: midnightblue;
+    text-align: center;
+    font-family: Verdana;
+  }
+
+h2{
+    color:midnightblue;
+    font-family: Verdana;
+    font-size: 20pt;
+}
+
+h3{
+    color:midnightblue;
+    font-family: Verdana;
+
+}
+  
+p {
+    color: darkslategray;
+    font-family:sans-serif;
+    font-size: 16px;
+}
+
+body{
+    background-color:khaki;
+    color:darkblue;
+}
+
+div{
+    padding: 10px;
+    margin: 10 px;
+}
+#sauces{
+    display: none;
+}
+
+#coral_bits:checked ~ #sauces {
+    display: block;
+  }
+
+table, tr, td{
+    border: 1px;
+    background-color: rgb(255, 246, 201);
+    text-align: center;
+    font-family: Arial;
+    margin: 2px;
+    padding-bottom: 2px;
+}
+
+a:link{
+    color: darkslateblue;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+  }

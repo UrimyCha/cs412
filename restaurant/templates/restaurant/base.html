@@ -1,0 +1,20 @@
+<!-- restaurant/templates/restaurant/base.html -->
+{% load static %}
+<html>
+    <head>
+        <title>The Krusty Krab</title>
+        <link rel="stylesheet" href="{% static 'restaurant_styles.css' %}">
+    </head>
+    <body>
+        <h1>Welcome to the Krusty Krab!</h1>
+        <nav>
+            <ul><a href="{% url 'main' %}">Home</a> <a href="{% url 'order' %}">Order Now</a> </ul>
+        </nav>
+    {% block content %}
+
+    {% endblock %}
+    
+    <!-- <hr>
+    The current time is {{current_time}}. -->
+    </body>
+</html>
