@@ -16,7 +16,7 @@ class Article(models.Model):
     image_url = models.URLField(blank=True) #new field == leave it as blank for existing fields that do not have this field
 
     def __str__(self):
-        """"Return a string representation of the Article"""
+        """Return a string representation of the Article"""
         return f'{self.title} by {self.author}'
 
 

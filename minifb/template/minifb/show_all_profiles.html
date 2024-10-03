@@ -1,0 +1,27 @@
+<!-- blog/template/minifb/show_all.html -->
+{% extends 'minifb/base.html' %}
+
+{% block content %}
+<h1>Showing all profiles:</h1>
+
+<!-- print out the context variables called articles -->
+
+<!--{{articles}}-->
+<main class="grid-container">  <!--formerly a div tag-->
+    {% for p in profiles %}
+    <profile>  <!--formerly a div tag-->
+
+        <img src={{p.image_url}}>
+
+        <div>
+            <h2>{{p.Firstname}}{{p.lastname}}</h2>
+            <h3>From: {{p.city}}</h3>
+          
+        </div>
+
+    </profile>
+    {% endfor %}
+</main>
+
+
+{% endblock %}
