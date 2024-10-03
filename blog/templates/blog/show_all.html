@@ -1,0 +1,29 @@
+<!-- blog/template/blog/show_all.html -->
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h1>showing all articles</h1>
+
+<!-- print out the context variables called articles -->
+
+<!--{{articles}}-->
+<main class="grid-container">  <!--formerly a div tag-->
+    {% for a in articles %}
+    <article>  <!--formerly a div tag-->
+
+        <img src={{a.image_url}}>
+
+        <div>
+            <h2>{{a.title}}</h2>
+            <h3>{{a.author}} at {{a.published}}</h3>
+            <p>
+                {{a.text}}
+            </p>            
+        </div>
+
+    </article>
+    {% endfor %}
+</main>
+
+
+{% endblock %}
