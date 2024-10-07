@@ -11,11 +11,11 @@
     {% for p in profiles %}
     <profile>  <!--formerly a div tag-->
 
-        <img src={{p.image_url}}>
+        <img src={{p.image_url}} width="300">
 
         <div>
-            <h2>{{p.Firstname}}{{p.lastname}}</h2>
-            <h3>From: {{p.city}}</h3>
+            <h2>{{p.firstname}} {{p.lastname}}</h2>
+            <h3>Hometown: {{p.city}}</h3>
           
         </div>
 
