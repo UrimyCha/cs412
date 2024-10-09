@@ -11,10 +11,15 @@
     {% for p in profiles %}
     <profile>  <!--formerly a div tag-->
 
-        <img src={{p.image_url}} width="300">
+        <a href="{% url 'show_profile' p.pk %}">
+            <img src={{p.image_url}} width="300">            
+        </a>
+
 
         <div>
-            <h2>{{p.firstname}} {{p.lastname}}</h2>
+            <a href="{% url 'show_profile' p.pk %}">
+                <h2>{{p.firstname}} {{p.lastname}}</h2>
+            </a>
             <h3>Hometown: {{p.city}}</h3>
           
         </div>

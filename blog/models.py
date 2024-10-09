@@ -18,6 +18,23 @@ class Article(models.Model):
     def __str__(self):
         """Return a string representation of the Article"""
         return f'{self.title} by {self.author}'
+    
+    def get_comments(self):
+        '''Retrieve all comments for this article'''
 
+        # use the ORM to filter comments where this instance of Article is the FK
+        comments = Comment.objects.filter(article=self)     # could have used pk of this object or just self
+        return comments
+
+class Comment(models.Model):
+    '''ecapsulate a comment on an article'''
+    article = models.ForeignKey("Article", on_delete=models.CASCADE)
+    author = models.TextField(blank=False)
+    text = models.TextField(blank=False)
+    published = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return a string representation of this object"""
+        return f'{self.text}'
 
 

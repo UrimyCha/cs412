@@ -1,0 +1,38 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h1>Current Profile</h1>
+
+<!-- print out the context variables called profile -->
+
+<!--{{profile}}-->
+<main class="grid-container">  <!--formerly a div tag-->
+    <profile class="featured">  <!--formerly a div tag-->
+
+        <img src={{profile.image_url}} width="200">
+
+        <div>
+            <h2>{{profile.firstname}} {{profile.lastname}}</h2>
+            <h3>Hometown: {{profile.city}}</h3>
+            <p>contact: {{profile.email}}</p>
+        </div>
+
+    </profile>
+
+    <div>
+        <h2>Status Messages</h2>
+        {% for p in profile.get_status_messages %}
+        <div>
+            <strong>posted on: {{p.timestamp}}</strong>
+            <p>
+                {{p.message}}
+            </p>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</main>
+
+
+{% endblock %}

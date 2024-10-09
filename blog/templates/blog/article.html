@@ -1,0 +1,49 @@
+<!-- blog/template/blog/show_all.html -->
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h1>{{article.title}}</h1>
+
+<!-- print out the context variables called articles -->
+
+<!--{{articles}}-->
+<main class="grid-container">  <!--formerly a div tag-->
+
+    <article class='featured'>  <!--formerly a div tag-->
+
+        <img src={{article.image_url}}>
+
+        <div>
+            <h2>{{article.title}}</h2>
+            <h3>{{article.author}} at {{article.published}}</h3>
+            <p>
+                {{article.text}}
+            </p>            
+        </div>
+
+    </article>
+
+    <div>
+        <h2>Comments</h2>
+        <!-- all the Article's get_comment method -->
+        {% for c in article.get_comments %}
+        <div>
+            <strong>by {{c.author}} and {{c.published}}</strong>
+            <p>
+                {{c.text}}
+            </p>
+        </div>
+        {% endfor %}
+        <!-- if there are no comments -->
+         {% else %}
+            <div>
+                <h2> No comments </h2>
+            </div>
+         {% endif %}
+
+    </div>
+
+</main>
+
+
+{% endblock %}
