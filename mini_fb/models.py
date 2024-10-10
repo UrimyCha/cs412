@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Profile(models.Model):
@@ -7,7 +8,6 @@ class Profile(models.Model):
     lastname = models.TextField(blank=False)
     city = models.TextField(blank=False)
     email = models.TextField(blank=False)
-    lastname = models.TextField(blank=False)
     image_url = models.URLField(blank=False)
 
     def __str__(self):
@@ -20,6 +20,9 @@ class Profile(models.Model):
         message = StatusMessage.objects.filter(profile=self)     # could have used pk of this object or just self
         return message
     
+    def get_absolute_url(self):
+        return reverse('show_profile', kwargs={'pk': self.pk})
+
 class StatusMessage(models.Model):
     # model the data attributes of Facebook status message
     timestamp = models.DateTimeField(auto_now=True)

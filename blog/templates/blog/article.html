@@ -19,27 +19,36 @@
             <p>
                 {{article.text}}
             </p>            
+
+            <h4><a href="{% url 'create_comment' article.pk %}">
+                Add a comment</a>
+            </h4>
         </div>
 
     </article>
 
     <div>
-        <h2>Comments</h2>
-        <!-- all the Article's get_comment method -->
-        {% for c in article.get_comments %}
-        <div>
-            <strong>by {{c.author}} and {{c.published}}</strong>
-            <p>
-                {{c.text}}
-            </p>
-        </div>
-        {% endfor %}
-        <!-- if there are no comments -->
-         {% else %}
+        {% if article.get_comments %}
+            <h2>Comments</h2>
+            <!-- call the Article's get_comments() method -->
+            <!-- {{article.get_comments}}  -->
+        
+            {% for c in article.get_comments %}
             <div>
-                <h2> No comments </h2>
+                <strong>by {{c.author}} and {{c.published}} </strong>
+                <p>
+                    {{c.text}}
+                </p>
+
             </div>
-         {% endif %}
+            {% endfor %}
+
+        {% else %}
+            <div>
+                <h2>No comments</h2>
+            </div>
+        {% endif %}
+
 
     </div>
 
