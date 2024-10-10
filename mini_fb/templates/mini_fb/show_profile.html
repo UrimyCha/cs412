@@ -21,6 +21,8 @@
 
     <div>
         <h2>Status Messages</h2>
+        <h3><a href="{% url 'create_status' profile.pk %}">Create new status post</a></h3>
+
         {% for p in profile.get_status_messages %}
         <div>
             <strong>posted on: {{p.timestamp}}</strong>
@@ -29,7 +31,6 @@
             </p>
         </div>
         {% endfor %}
-
 
     </div>
 </main>
