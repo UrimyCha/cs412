@@ -4,12 +4,16 @@
 
 <h2>Make a New Status Post!</h2>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <!-- display the form {context variable} -->
     {% csrf_token %}
 
     {{form}}
-    <input type="submit" name="Create_Status_Post">
+    Upload an Image: <input type="file" name = "files" multiple>
+
+    <div>
+        <input type="submit" name="Create_Status_Post">
+    </div>
     
 </form>
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Profile, StatusMessage
+from .models import Profile, Image
 from django.views.generic import ListView, DetailView, CreateView      #a way to send and render data 
 from .forms import CreateProfileForm, CreateStatusMessageForm
 from django.urls import reverse
@@ -42,6 +42,17 @@ class CreateStatusMessageView(CreateView):
         # attach the article to the comment
         # form.instance is the new Comment object
         form.instance.profile = profile
+        
+        # save the status message to database
+        sm = form.save()
+
+        # read the file from the form:
+        files = self.request.FILES.getlist('files')
+
+        for file in files:
+            # Create a new Image object for each file
+            image = Image(status_message=sm, image=file)
+            image.save()  # Save each image object to the database
 
         return super().form_valid(form)
 
