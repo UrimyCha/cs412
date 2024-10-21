@@ -1,6 +1,8 @@
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Article
-from .forms import CreateCommentForm
+from .forms import CreateCommentForm, CreateArticleForm
 from django.views.generic import ListView, DetailView, CreateView       #a way to send and render data 
 import random
 from django.urls import reverse
@@ -72,3 +74,11 @@ class CreateCommentView(CreateView):
         #add the article to the context data
         context['article'] = article
         return context
+
+class CreateArticleView(CreateView):
+    form_class = CreateArticleForm
+    template_name = "blog/create_article_form.html"
+
+    def form_valid(self, form):
+        print(f'CreateArticleView: form.cleaned_data={form.cleaned_data}')
+        return super().form_valid(form)

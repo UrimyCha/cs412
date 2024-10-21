@@ -3,6 +3,7 @@
 # make migrations only if you make changes to the fields (will be a quiz question)
 
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Article(models.Model):
@@ -13,7 +14,8 @@ class Article(models.Model):
     author = models.TextField(blank=False)
     text = models.TextField(blank=False)
     published = models.DateTimeField(auto_now=True)
-    image_url = models.URLField(blank=True) #new field == leave it as blank for existing fields that do not have this field
+    #image_url = models.URLField(blank=True) #new field == leave it as blank for existing fields that do not have this field
+    image_file = models.ImageField(blank=True)
 
     def __str__(self):
         """Return a string representation of the Article"""
@@ -25,6 +27,10 @@ class Article(models.Model):
         # use the ORM to filter comments where this instance of Article is the FK
         comments = Comment.objects.filter(article=self)     # could have used pk of this object or just self
         return comments
+    
+    def get_absolute_url(self):
+        '''Return the URL to display this Article.'''
+        return reverse('article', kwargs={'pk':self.pk})
 
 class Comment(models.Model):
     '''ecapsulate a comment on an article'''
