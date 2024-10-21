@@ -26,6 +26,9 @@
         {% for p in profile.get_status_messages %}
         <div>
             <strong>posted on: {{p.timestamp}}</strong>
+            {% for img in p.get_images %}
+                <img src='{{img.image.url}}' alt='{{img.image.url}}' width="150">
+            {% endfor %}            
             <p>
                 {{p.message}}
             </p>

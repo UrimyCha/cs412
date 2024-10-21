@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Profile
+from .models import Profile, StatusMessage
 from django.views.generic import ListView, DetailView, CreateView      #a way to send and render data 
 from .forms import CreateProfileForm, CreateStatusMessageForm
 from django.urls import reverse
@@ -30,7 +30,6 @@ class CreateStatusMessageView(CreateView):
         #return "blog/show_all"
         #return reverse("show_all")
         return reverse("show_profile", kwargs=self.kwargs)
-
 
     def form_valid(self, form):
         '''method executes after form submission'''
