@@ -15,6 +15,8 @@
             <h2>{{profile.firstname}} {{profile.lastname}}</h2>
             <h3>Hometown: {{profile.city}}</h3>
             <p>contact: {{profile.email}}</p>
+            <p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
+
         </div>
 
     </profile>
@@ -32,6 +34,8 @@
             <p>
                 {{p.message}}
             </p>
+            <a href="{% url 'delete_status' p.pk %}">delete</a> 
+            <a href="{% url 'update_status' p.pk %}">update</a> 
         </div>
         {% endfor %}
 

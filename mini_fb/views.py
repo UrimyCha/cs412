@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Profile, Image
-from django.views.generic import ListView, DetailView, CreateView      #a way to send and render data 
-from .forms import CreateProfileForm, CreateStatusMessageForm
+from .models import Profile, Image, StatusMessage
+from django.views.generic import *      #a way to send and render data 
+from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
 from django.urls import reverse
 from typing import Any
 
@@ -70,3 +70,50 @@ class CreateStatusMessageView(CreateView):
         context['profile'] = profile
         return context
 
+class UpdateProfileView(UpdateView):
+    '''A view to update an Article and save it to the database.'''
+    form_class = UpdateProfileForm
+    template_name = "mini_fb/update_profile_form.html"
+    model = Profile
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class DeleteStatusMessageView(DeleteView):
+    '''A view to delete a comment and remove it from the database.'''
+    template_name = "mini_fb/delete_status_form.html"
+    model = StatusMessage
+    context_object_name = 'message'
+
+    def get_success_url(self):
+        '''Return a the URL to which we should be directed after the delete.'''
+        # get the pk for this comment
+        pk = self.kwargs.get('pk')
+        message = StatusMessage.objects.filter(pk=pk).first() # get one object from QuerySet
+        
+        # find the article to which this Comment is related by FK
+        profile = message.profile
+        
+        # reverse to show the article page
+        return reverse('show_profile', kwargs={'pk':profile.pk})
+
+class UpdateStatusMessageView(UpdateView):
+    '''A view to update an Article and save it to the database.'''
+    form_class = UpdateStatusMessageForm
+    template_name = "mini_fb/update_status_form.html"
+    model = StatusMessage
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        '''Return a the URL to which we should be directed after the delete.'''
+        # get the pk for this comment
+        pk = self.kwargs.get('pk')
+        message = StatusMessage.objects.filter(pk=pk).first() # get one object from QuerySet
+        
+        # find the article to which this Comment is related by FK
+        profile = message.profile
+        
+        # reverse to show the article page
+        return reverse('show_profile', kwargs={'pk':profile.pk})
