@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from .models import Profile, Image, StatusMessage
@@ -117,3 +117,27 @@ class UpdateStatusMessageView(UpdateView):
         
         # reverse to show the article page
         return reverse('show_profile', kwargs={'pk':profile.pk})
+    
+class CreateFriendView(View):
+    def dispatch(self, request, *args, **kwargs):
+        # Retrieve the Profile instance for the user initiating the friendship
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
+        # Retrieve the Profile instance for the friend to be added
+        other_profile = get_object_or_404(Profile, pk=self.kwargs['other_pk'])
+        
+        # Call the add_friend method to add the friendship, if it doesn't already exist
+        profile.add_friend(other_profile)
+        
+        # Redirect back to the profile page (or any other desired page)
+        return redirect('show_profile', pk=profile.pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = "mini_fb/friend_suggestions.html"
+    context_object_name = "profile"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get friend suggestions by calling the method on the profile instance
+        context['friend_suggestions'] = self.object.get_friend_suggestions()
+        return context

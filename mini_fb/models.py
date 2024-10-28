@@ -22,6 +22,43 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse('show_profile', kwargs={'pk': self.pk})
+    
+    def get_friends(self):
+        friend1 = Friend.objects.filter(profile1=self) 
+        friend2 = Friend.objects.filter(profile2=self) 
+
+        friends_profiles = [friend.profile2 for friend in friend1] + [friend.profile1 for friend in friend2]
+
+        return friends_profiles
+    
+    def add_friend(self,other):
+        # Ensure self-friending is not allowed
+        if self == other:
+            raise ValueError("A profile cannot friend itself.")
+        
+        # Check if the friend relationship already exists in either direction
+        existing_friendship = Friend.objects.filter(
+            models.Q(profile1=self, profile2=other) | models.Q(profile1=other, profile2=self)
+        ).exists()
+
+        # If no existing friendship is found, create a new Friend instance
+        if not existing_friendship:
+            new_friendship = Friend(profile1=self, profile2=other)
+            new_friendship.save()
+
+    def get_friend_suggestions(self):
+        # Get IDs of profiles that are already friends with this profile
+        friend_ids = Friend.objects.filter(
+            models.Q(profile1=self) | models.Q(profile2=self)
+        ).values_list('profile1__id', 'profile2__id')
+        
+        # Flatten the list of friend IDs and remove duplicates
+        friend_ids = {id for ids in friend_ids for id in ids if id != self.id}
+        
+        # Get all profiles excluding the current profile and its friends
+        suggestions = Profile.objects.exclude(id__in=friend_ids).exclude(id=self.id)
+        
+        return suggestions
 
 class StatusMessage(models.Model):
     # model the data attributes of Facebook status message
@@ -46,6 +83,14 @@ class Image(models.Model):
 
     def __str__(self):
         return f'{self.image}'
+
+class Friend(models.Model):
+    profile1 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile1")
+    profile2 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile2")
+    anniversary = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.profile1.firstname} {self.profile1.lastname} & {self.profile2.firstname} {self.profile2.lastname}'
 
 
 

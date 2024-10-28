@@ -38,7 +38,19 @@
             <a href="{% url 'update_status' p.pk %}">update</a> 
         </div>
         {% endfor %}
+    </div>
 
+    <div>
+        <h2>{{profile.firstname}}'s Friends</h2>
+        {% for f in profile.get_friends %}
+        <div>
+            <a href="{% url 'show_profile' f.pk %}">
+                <img src="{{f.image_url}}" width="100">
+                <p>{{f.firstname}} {{f.lastname}}</p>
+            </a>
+        </div>
+        {% endfor %}
+        <a href="{% url 'friend_suggestions' profile.pk %}"><h3>Friend Suggestions</h3></a>
     </div>
 </main>
 
