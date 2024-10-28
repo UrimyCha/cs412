@@ -59,6 +59,18 @@ class Profile(models.Model):
         suggestions = Profile.objects.exclude(id__in=friend_ids).exclude(id=self.id)
         
         return suggestions
+    
+    def get_news_feed(self):
+        friend_ids = Friend.objects.filter(
+            models.Q(profile1=self) | models.Q(profile2=self)
+        ).values_list('profile1__id', 'profile2__id')
+
+        friend_ids = {id for ids in friend_ids for id in ids}
+
+        newsfeed = StatusMessage.objects.filter(profile__id__in=friend_ids).order_by('-timestamp')
+
+        return newsfeed
+
 
 class StatusMessage(models.Model):
     # model the data attributes of Facebook status message

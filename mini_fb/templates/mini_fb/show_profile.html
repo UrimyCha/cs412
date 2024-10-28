@@ -1,58 +1,74 @@
-{% extends 'mini_fb/base.html' %}
+{% load static %}
+<html>
+    <head>
+        <title>Mini Facebook</title>
+        <link rel="stylesheet" href="https://cs-people.bu.edu/ucha/static/styles-mini-fb.css">
+    </head>
+    <body>
+        <header>
+            <h1>Mini Facebook</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'show_all_profiles' %}">Show All</a></li>
+                    <li><a href="{% url 'create_profile' %}">Create New Profile</a> </li>
+                    <li><a href="{% url 'show_profile' profile.pk %}">Profile Page</a></li>
+                    <li><a href="{% url 'news_feed' profile.pk %}">Newsfeed</a></li>
+                </ul>
+            </nav>
+        </header>
 
-{% block content %}
-<h1>Current Profile</h1>
+        <h1>Current Profile</h1>
 
-<!-- print out the context variables called profile -->
+        <!-- print out the context variables called profile -->
 
-<!--{{profile}}-->
-<main class="grid-container">  <!--formerly a div tag-->
-    <profile class="featured">  <!--formerly a div tag-->
+        <!--{{profile}}-->
+        <main class="grid-container">  <!--formerly a div tag-->
+            <profile class="featured">  <!--formerly a div tag-->
 
-        <img src={{profile.image_url}} width="200">
+                <img src={{profile.image_url}} width="200">
 
-        <div>
-            <h2>{{profile.firstname}} {{profile.lastname}}</h2>
-            <h3>Hometown: {{profile.city}}</h3>
-            <p>contact: {{profile.email}}</p>
-            <p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
+                <div>
+                    <h2>{{profile.firstname}} {{profile.lastname}}</h2>
+                    <h3>Hometown: {{profile.city}}</h3>
+                    <p>contact: {{profile.email}}</p>
+                    <p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
 
-        </div>
+                </div>
 
-    </profile>
+            </profile>
 
-    <div>
-        <h2>Status Messages</h2>
-        <h3><a href="{% url 'create_status' profile.pk %}">Create new status post</a></h3>
+            <div>
+                <h2>Status Messages</h2>
+                <h3><a href="{% url 'create_status' profile.pk %}">Create new status post</a></h3>
 
-        {% for p in profile.get_status_messages %}
-        <div>
-            <strong>posted on: {{p.timestamp}}</strong>
-            {% for img in p.get_images %}
-                <img src='{{img.image.url}}' alt='{{img.image.url}}' width="150">
-            {% endfor %}            
-            <p>
-                {{p.message}}
-            </p>
-            <a href="{% url 'delete_status' p.pk %}">delete</a> 
-            <a href="{% url 'update_status' p.pk %}">update</a> 
-        </div>
-        {% endfor %}
-    </div>
+                {% for p in profile.get_status_messages %}
+                <div>
+                    <strong>posted on: {{p.timestamp}}</strong>
+                    {% for img in p.get_images %}
+                        <img src='{{img.image.url}}' alt='{{img.image.url}}' width="150">
+                    {% endfor %}            
+                    <p>
+                        {{p.message}}
+                    </p>
+                    <a href="{% url 'delete_status' p.pk %}">delete</a> 
+                    <a href="{% url 'update_status' p.pk %}">update</a> 
+                </div>
+                {% endfor %}
+            </div>
 
-    <div>
-        <h2>{{profile.firstname}}'s Friends</h2>
-        {% for f in profile.get_friends %}
-        <div>
-            <a href="{% url 'show_profile' f.pk %}">
-                <img src="{{f.image_url}}" width="100">
-                <p>{{f.firstname}} {{f.lastname}}</p>
-            </a>
-        </div>
-        {% endfor %}
-        <a href="{% url 'friend_suggestions' profile.pk %}"><h3>Friend Suggestions</h3></a>
-    </div>
-</main>
+            <div>
+                <h2>{{profile.firstname}}'s Friends</h2>
+                {% for f in profile.get_friends %}
+                <div>
+                    <a href="{% url 'show_profile' f.pk %}">
+                        <img src="{{f.image_url}}" width="100">
+                        <p>{{f.firstname}} {{f.lastname}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+                <a href="{% url 'friend_suggestions' profile.pk %}"><h3>Friend Suggestions</h3></a>
+            </div>
+        </main>
 
-
-{% endblock %}
+</body>
+</html>

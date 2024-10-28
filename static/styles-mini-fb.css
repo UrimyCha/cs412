@@ -105,3 +105,24 @@ nav li {
     margin: 0px 0 0 -50px;
     border: 0;
 }
+
+.news-feed {
+    background: #fff;
+    gap: 25px;
+    border-top: 10px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr;   
+}
+
+/* formatting for newsfeed_items */
+newsfeed_item {
+    color:#150484; 
+    background-color: #fff;
+    border-bottom: #150484 solid 1px;
+    width: 80%;
+    padding-bottom: 50px;
+    margin: 10px;
+    text-align: justify;
+    vertical-align: top;
+}
