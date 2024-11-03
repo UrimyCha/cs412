@@ -1,0 +1,22 @@
+<!-- blog/template/blog/show_all.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h1>Welcome to the Login Page</h1>
+
+<!-- very basic login form -->
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form}}
+    <!-- what to do after login success -->
+    {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{request.GET.next}}">
+
+    {% else %}
+    <input type="hidden" name="next" value="{% url 'show_all_profiles' %}">
+    {% endif %}
+    <input type="submit" value="Login">
+</form>
+
+
+{% endblock %}
