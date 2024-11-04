@@ -75,18 +75,21 @@ class CreateStatusMessageView(LoginRequiredMixin,CreateView):
     def get_success_url(self) -> str:
         #return "blog/show_all"
         #return reverse("show_all")
-        return reverse("show_profile", kwargs=self.kwargs)
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        return reverse("show_profile", kwargs={'pk':profile.pk})
 
     def form_valid(self, form):
         '''method executes after form submission'''
         print(f'CreateStatusMessageView.form_valid(): form={form.cleaned_data}')
         print(f'CreateStatusMessageView.form_valid(): self.kwargs={self.kwargs}')
 
+        user = self.request.user
+
         # find the article with the pk from the url
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        profile = Profile.objects.get(user = user)
 
         # attach the article to the comment
-        # form.instance is the new Comment object
         form.instance.profile = profile
         
         # save the status message to database
@@ -105,15 +108,6 @@ class CreateStatusMessageView(LoginRequiredMixin,CreateView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         #get the super class version of the context data
         context = super().get_context_data(**kwargs)
-
-        # find the pk from the URL
-        pk = self.kwargs['pk']
-
-        # find the corresponding article
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
-
-        #add the article to the context data
-        context['profile'] = profile
 
         user = self.request.user
         if user.is_authenticated:
