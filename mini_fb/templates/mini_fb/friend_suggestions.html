@@ -10,7 +10,7 @@
                 <img src="{{f.image_url}}" width="150">           
                 <p>{{f.firstname}} {{f.lastname}}</p>
             </a> <br>
-            <a href="{% url 'add_friend' pk=profile.pk other_pk=f.pk %}">Add Friend</a>
+            <a href="{% url 'add_friend' other_pk=f.pk %}">Add Friend</a>
         </profile>
     {% empty %}
     <p>No friend suggestions available.</p>
