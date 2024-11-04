@@ -20,6 +20,6 @@ urlpatterns = [
     # authentication urls:
     path('login/', auth_views.LoginView.as_view(template_name='mini_fb/login.html'), name="login"),
     path('logout/', auth_views.LogoutView.as_view(template_name='mini_fb/logged_out.html'), name="logout"),
-    #path('register/', views.RegistrationView.as_view(), name='register'),   ## NEW
+    #path('create_profile/', views.RegistrationView.as_view(), name='create_profile'),   ## NEW
 
 ]

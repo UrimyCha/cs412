@@ -20,6 +20,14 @@ class ShowAllProfilesView(ListView):
     def dispatch(self, *args, **kwargs):
         print(f"self.request.user={self.request.user}")
         return super().dispatch(*args, **kwargs)
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        context['profile_user'] = profile
+
+        return context
 
 class ShowProfilePageView(DetailView):
     model = Profile
@@ -29,8 +37,9 @@ class ShowProfilePageView(DetailView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         #get the super class version of the context data
         context = super().get_context_data(**kwargs)
-
-        context['profile_user'] = self.get_object().user
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        context['profile_user'] = profile
         return context
     
     

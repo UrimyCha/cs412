@@ -1,106 +1,77 @@
-{% load static %}
-<html>
-    <head>
-        <title>Mini Facebook</title>
-        <link rel="stylesheet" href="https://cs-people.bu.edu/ucha/static/styles-mini-fb.css">
-    </head>
-    <body>
-        <header>
-            <h1>Mini Facebook</h1>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'show_all_profiles' %}">Show All</a></li>
-                    <li><a href="{% url 'create_profile' %}">Create New Profile</a> </li>
+{% extends 'mini_fb/base.html' %}
 
-                    <!-- Nav only for profile owner -->
-                    {% if request.user.is_authenticated and request.user == profile_user%}
-                    <li><a href="{% url 'show_profile' profile.pk %}">Profile Page</a></li>
-                    <li><a href="{% url 'news_feed' %}">Newsfeed</a></li>
-                    <form method="POST" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <input type="submit" value="Logout">
-                    </form>
+{% block content %}
 
-                    {% elif request.user.is_authenticated %}
-                    <form method="POST" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <input type="submit" value="Logout">
-                    </form>
-                    {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    {% endif %}
-                    <p>
-                        {% if request.user.is_authenticated %}
-                        Logged in user: {{ request.user }}
-                        {% else %}
-                        Not logged in.
-                        {% endif %}
-                    </p>
-                </ul>
-            </nav>
-        </header>
+<!-- Nav only for profile owner -->
+<nav>
+    <ul>
+        {% if request.user.is_authenticated and request.user == profile_user%}
+        <li><a href="{% url 'news_feed' %}">Newsfeed</a></li>
+        {% endif %}        
+    </ul>
+ </nav>
 
-        <h1>Current Profile</h1>
 
-        <!-- print out the context variables called profile -->
+<h1>Current Profile</h1>
 
-        <!--{{profile}}-->
-        <main class="grid-container">  <!--formerly a div tag-->
-            <profile class="featured">  <!--formerly a div tag-->
+<!-- print out the context variables called profile -->
 
-                <img src={{profile.image_url}} width="200">
+<!--{{profile}}-->
+<main class="grid-container">  <!--formerly a div tag-->
+    <profile class="featured">  <!--formerly a div tag-->
 
-                <div>
-                    <h2>{{profile.firstname}} {{profile.lastname}}</h2>
-                    <h3>Hometown: {{profile.city}}</h3>
-                    <p>contact: {{profile.email}}</p>
-                    {% if request.user.is_authenticated %}
-                    {% if request.user == profile_user %}
-                    <p><a href="{% url 'update_profile' %}">Update Profile</a></p>
-                    {% endif %}
-                    {% endif %}
+        <img src={{profile.image_url}} width="200">
 
-                </div>
+        <div>
+            <h2>{{profile.firstname}} {{profile.lastname}}</h2>
+            <h3>Hometown: {{profile.city}}</h3>
+            <p>contact: {{profile.email}}</p>
+            {% if request.user.is_authenticated %}
+            {% if request.user == profile_user %}
+            <p><a href="{% url 'update_profile' %}">Update Profile</a></p>
+            {% endif %}
+            {% endif %}
 
-            </profile>
+        </div>
 
-            <div>
-                <h2>Status Messages</h2>
-                {% if request.user.is_authenticated and request.user == profile_user %}
-                <h3><a href="{% url 'create_status' profile.pk %}">Create new status post</a></h3>
-                {% endif %}
+    </profile>
 
-                {% for p in profile.get_status_messages %}
-                <div>
-                    <strong>posted on: {{p.timestamp}}</strong>
-                    {% for img in p.get_images %}
-                        <img src='{{img.image.url}}' alt='{{img.image.url}}' width="150">
-                    {% endfor %}            
-                    <p>
-                        {{p.message}}
-                    </p>
-                    {% if request.user.is_authenticated and request.user == profile_user %}
-                    <a href="{% url 'delete_status' p.pk %}">delete</a> 
-                    <a href="{% url 'update_status' p.pk %}">update</a> 
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
+    <div>
+        <h2>Status Messages</h2>
+        {% if request.user.is_authenticated and request.user == profile_user %}
+        <h3><a href="{% url 'create_status' profile.pk %}">Create new status post</a></h3>
+        {% endif %}
 
-            <div>
-                <h2>{{profile.firstname}}'s Friends</h2>
-                {% for f in profile.get_friends %}
-                    <a href="{% url 'show_profile' f.pk %}">
-                        <img src="{{f.image_url}}" width="100"> 
-                        <p>{{f.firstname}} {{f.lastname}}</p>
-                    </a>
-                {% endfor %}
-                {% if request.user.is_authenticated and request.user == profile_user%}
-                <br>
-                <a href="{% url 'friend_suggestions' %}"><h3>Friend Suggestions</h3></a>
-                {% endif %}
-            </div>
-        </main>
+        {% for p in profile.get_status_messages %}
+        <div>
+            <strong>posted on: {{p.timestamp}}</strong>
+            {% for img in p.get_images %}
+                <img src='{{img.image.url}}' alt='{{img.image.url}}' width="150">
+            {% endfor %}            
+            <p>
+                {{p.message}}
+            </p>
+            {% if request.user.is_authenticated and request.user == profile_user %}
+            <a href="{% url 'delete_status' p.pk %}">delete</a> 
+            <a href="{% url 'update_status' p.pk %}">update</a> 
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 
-</body>
-</html>
+    <div>
+        <h2>{{profile.firstname}}'s Friends</h2>
+        {% for f in profile.get_friends %}
+            <a href="{% url 'show_profile' f.pk %}">
+                <img src="{{f.image_url}}" width="100"> 
+                <p>{{f.firstname}} {{f.lastname}}</p>
+            </a>
+        {% endfor %}
+        {% if request.user.is_authenticated and request.user == profile_user%}
+        <br>
+        <a href="{% url 'friend_suggestions' %}"><h3>Friend Suggestions</h3></a>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}
