@@ -8,7 +8,8 @@ from django.views.generic import *      #a way to send and render data
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
 from django.urls import reverse
 from typing import Any
-from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 
 class ShowAllProfilesView(ListView):
     # class definition, not a function
@@ -36,6 +37,26 @@ class ShowProfilePageView(DetailView):
 class CreateProfileView(CreateView):
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['user_form'] = UserCreationForm()
+
+        return context
+    
+    def form_valid(self, form):
+        # Reconstruct the UserCreationForm instance from the self.request.POST data
+        user_form = UserCreationForm(self.request.POST)
+
+        # Call the save() method on the UserCreationForm instance. 
+        user = user_form.save()
+
+        # Attach the user to the Profile instance object (form.instance) so that it can be saved to the database.
+        form.instance.user = user
+
+        # Delegate the rest to the super class’ form_valid method.
+        return super().form_valid(form)
+
 
 class CreateStatusMessageView(LoginRequiredMixin,CreateView):
     form_class = CreateStatusMessageForm

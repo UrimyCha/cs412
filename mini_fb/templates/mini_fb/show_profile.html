@@ -96,6 +96,7 @@
                     </a>
                 {% endfor %}
                 {% if request.user.is_authenticated and request.user == profile_user%}
+                <br>
                 <a href="{% url 'friend_suggestions' %}"><h3>Friend Suggestions</h3></a>
                 {% endif %}
             </div>
