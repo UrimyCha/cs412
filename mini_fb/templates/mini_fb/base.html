@@ -15,16 +15,16 @@
                     <!-- urls that DO depend on authentication -->
                     {% if request.user.is_authenticated %}
 
-                    <li><a href="{% url 'show_profile' profile_user.pk %}">Profile Page</a></li>
-                    <!-- log out must be a http post, so we use a form to call the url -->
-                     <!-- was previously:  <li><a href="{% url 'logout' %}">Logout</a></li> -->
-                    <form method="POST" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <input type="submit" value="Logout">
-                    </form>
+                        <li><a href="{% url 'show_profile' profile_user.pk %}">Profile Page</a></li>
+                        <!-- log out must be a http post, so we use a form to call the url -->
+                        <!-- was previously:  <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Logout">
+                        </form>
 
                     {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                     <p>
                         {% if request.user.is_authenticated %}

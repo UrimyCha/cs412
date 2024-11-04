@@ -5,7 +5,7 @@
 <!-- Nav only for profile owner -->
 <nav>
     <ul>
-        {% if request.user.is_authenticated and request.user == profile_user%}
+        {% if request.user.is_authenticated and request.user == profile.user%}
         <li><a href="{% url 'news_feed' %}">Newsfeed</a></li>
         {% endif %}        
     </ul>
@@ -38,8 +38,8 @@
 
     <div>
         <h2>Status Messages</h2>
-        {% if request.user.is_authenticated and request.user == profile_user %}
-        <h3><a href="{% url 'create_status' profile.pk %}">Create new status post</a></h3>
+        {% if request.user.is_authenticated and request.user == profile.user %}
+        <h3><a href="{% url 'create_status' profile_user.pk %}">Create new status post</a></h3>
         {% endif %}
 
         {% for p in profile.get_status_messages %}
@@ -51,7 +51,7 @@
             <p>
                 {{p.message}}
             </p>
-            {% if request.user.is_authenticated and request.user == profile_user %}
+            {% if request.user.is_authenticated and request.user == profile.user %}
             <a href="{% url 'delete_status' p.pk %}">delete</a> 
             <a href="{% url 'update_status' p.pk %}">update</a> 
             {% endif %}
@@ -67,7 +67,7 @@
                 <p>{{f.firstname}} {{f.lastname}}</p>
             </a>
         {% endfor %}
-        {% if request.user.is_authenticated and request.user == profile_user%}
+        {% if request.user.is_authenticated and request.user == profile.user %}
         <br>
         <a href="{% url 'friend_suggestions' %}"><h3>Friend Suggestions</h3></a>
         {% endif %}

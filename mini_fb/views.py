@@ -24,9 +24,9 @@ class ShowAllProfilesView(ListView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        profile = Profile.objects.get(user=user)
-        context['profile_user'] = profile
-
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
         return context
 
 class ShowProfilePageView(DetailView):
@@ -38,8 +38,9 @@ class ShowProfilePageView(DetailView):
         #get the super class version of the context data
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        profile = Profile.objects.get(user=user)
-        context['profile_user'] = profile
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
         return context
     
     
@@ -113,6 +114,12 @@ class CreateStatusMessageView(LoginRequiredMixin,CreateView):
 
         #add the article to the context data
         context['profile'] = profile
+
+        user = self.request.user
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
+
         return context
     
     def get_login_url(self) -> str:
@@ -136,6 +143,17 @@ class UpdateProfileView(LoginRequiredMixin,UpdateView):
         user = self.request.user
         profile = Profile.objects.filter(user=user).first()
         return profile
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        #get the super class version of the context data
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
+
+        return context
 
 class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     '''A view to delete a comment and remove it from the database.'''
@@ -158,6 +176,17 @@ class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     def get_login_url(self) -> str:
         '''return the URL required for login'''
         return reverse('login') 
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        #get the super class version of the context data
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
+
+        return context
 
 class UpdateStatusMessageView(LoginRequiredMixin,UpdateView):
     '''A view to update an Article and save it to the database.'''
@@ -183,6 +212,17 @@ class UpdateStatusMessageView(LoginRequiredMixin,UpdateView):
     def get_login_url(self) -> str:
         '''return the URL required for login'''
         return reverse('login') 
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        #get the super class version of the context data
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
+
+        return context
     
 class CreateFriendView(LoginRequiredMixin, View):
     def dispatch(self, request, *args, **kwargs):
@@ -220,6 +260,17 @@ class ShowFriendSuggestionsView(LoginRequiredMixin,DetailView):
         user = self.request.user
         profile = Profile.objects.filter(user=user).first()
         return profile
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        #get the super class version of the context data
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
+
+        return context
 
 class ShowNewsFeedView(LoginRequiredMixin,DetailView):
     model = Profile
@@ -240,3 +291,14 @@ class ShowNewsFeedView(LoginRequiredMixin,DetailView):
         user = self.request.user
         profile = Profile.objects.filter(user=user).first()
         return profile
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        #get the super class version of the context data
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+            context['profile_user'] = profile
+
+        return context
