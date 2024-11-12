@@ -25,8 +25,10 @@ class Voter(models.Model):
     v22general = models.CharField(max_length=5)
     v23town = models.CharField(max_length=5)
     voter_score = models.IntegerField()
+
     def __str__(self):
         return f'{self.first_name} {self.last_name} DOB: {self.dob}, Address: {self.street_num} {self.street_name}'
+    
 
 def load_data():
     '''Function to load data records from CSV file into Django model instances.'''

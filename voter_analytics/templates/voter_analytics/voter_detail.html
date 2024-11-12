@@ -1,0 +1,63 @@
+<!-- voter_analytics/voter_detail.html -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h2>{{voter.first_name}} {{voter.last_name}}'s Information</h2>
+    <div class="row">
+        <table>
+            <tr>
+                <th>Name:</th>
+                <th>Address:</th>
+                <th>Date of Birth:</th>
+                <th>Registration Date:</th>
+                <th>Party Affiliation:</th>
+                <th>Precinct Number:</th>                
+            </tr>
+            <tr>
+                <td>{{voter.first_name}} {{voter.last_name}}</td>
+                <td> <a href="https://www.google.com/maps?q={{voter.street_num}} {{voter.street_name}} 
+                    {% if voter.apt_num != '' %}
+                    APT {{voter.apt_num}}
+                    {% endif %}
+                    Newton, MA {{voter.zip_code}}">
+                    {{voter.street_num}} {{voter.street_name}} 
+                    {% if voter.apt_num != '' %}
+                    APT {{voter.apt_num}}
+                    {% endif %}
+                    Newton, MA {{voter.zip_code}}
+                </a>
+                </td>
+                <td> {{voter.dob}} </td>
+                <td> {{voter.registration_date}} </td>
+                <td> {{voter.party}} </td>
+                <td> {{voter.precinct_num}} </td>
+            </tr>
+        </table>
+        <h3>Past Election Participation</h3>
+        <table>
+            <tr>
+                <th>v20state</th>
+                <th>v21town</th>
+                <th>v21primary</th>
+                <th>v22general</th>
+                <th>v23town</th>
+                <th>Voter Score</th>
+            </tr>
+            <tr>
+                <td> {{voter.v20state}} </td>
+                <td> {{voter.v21town}} </td>
+                <td> {{voter.v21primary}} </td>
+                <td> {{voter.v22general}} </td>
+                <td> {{voter.v23town}} </td>
+                <td> {{voter.voter_score}} </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}
