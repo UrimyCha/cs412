@@ -126,9 +126,9 @@ class GraphView(ListView):
         title_text = f"Voter Distribution by Election"
         graph_elections = plotly.offline.plot({"data": [fig],
                                                 "layout_title_text": title_text}, 
-                                         auto_open=False, 
-                                         output_type="div",
-                                         ) 
+                                                auto_open=False, 
+                                                output_type="div",
+                                                ) 
         context['graph_elections'] = graph_elections
 
         return context

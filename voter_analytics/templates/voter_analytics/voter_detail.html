@@ -10,14 +10,10 @@
         <table>
             <tr>
                 <th>Name:</th>
-                <th>Address:</th>
-                <th>Date of Birth:</th>
-                <th>Registration Date:</th>
-                <th>Party Affiliation:</th>
-                <th>Precinct Number:</th>                
+                <td>{{voter.first_name}} {{voter.last_name}}</td>
             </tr>
             <tr>
-                <td>{{voter.first_name}} {{voter.last_name}}</td>
+                <th>Address:</th>
                 <td> <a href="https://www.google.com/maps?q={{voter.street_num}} {{voter.street_name}} 
                     {% if voter.apt_num != '' %}
                     APT {{voter.apt_num}}
@@ -30,9 +26,21 @@
                     Newton, MA {{voter.zip_code}}
                 </a>
                 </td>
+            </tr>
+            <tr>
+                <th>Date of Birth:</th>
                 <td> {{voter.dob}} </td>
+            </tr>
+            <tr>
+                <th>Registration Date:</th>
                 <td> {{voter.registration_date}} </td>
+            </tr>
+            <tr>
+                <th>Party Affiliation:</th>
                 <td> {{voter.party}} </td>
+            </tr>
+            <tr>
+                <th>Precinct Number:</th>                
                 <td> {{voter.precinct_num}} </td>
             </tr>
         </table>
