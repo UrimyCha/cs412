@@ -44,7 +44,11 @@ INSTALLED_APPS = [
     "blog",
     "mini_fb",
     "marathon_analytics",
-    "voter_analytics"
+    "voter_analytics",
+    "project",
+    "phonenumber_field",
+    "bank_example"
+
 ]
 
 MIDDLEWARE = [
