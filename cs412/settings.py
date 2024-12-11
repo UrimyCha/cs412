@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "marathon_analytics",
     "voter_analytics",
     "project",
-    "phonenumber_field",
     "bank_example"
 
 ]
