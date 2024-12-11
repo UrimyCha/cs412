@@ -1,0 +1,156 @@
+/* style the header and nav bar */
+.header {
+    overflow: hidden;
+    background-color: #4a6fa5;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -10px;
+    padding: 12px;
+}
+
+/* Style the header links */
+.header a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+    color: #e2f7ff;
+}
+
+.header-nav {
+    float: right;
+}
+
+.header a.logo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.grid-container {
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.profile-container {
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+body {
+    background: #dbe9ee;
+    margin: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* This code will help crop an image to display a small size on the all profiles page */
+.crop {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.crop img {
+    width: 300px; 
+    height: 300px;
+    border: 0;
+    object-fit: cover;
+}
+
+.menu {
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    grid-gap: 10px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+table{
+    margin: 0px auto;
+    background-color: #ffffff;
+}
+
+th,td {
+    text-align: left;
+    padding: 15px;
+}
+
+.cats a{
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #4a6fa5;
+    display: inline-block;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

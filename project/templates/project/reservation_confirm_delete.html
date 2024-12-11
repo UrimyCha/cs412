@@ -1,0 +1,13 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h2>Are you sure you want to cancel this reservation?</h2>
+<p>{{ reservation }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="button-54">Yes, Cancel</button>
+</form>
+<a href="{% url 'reservation_lookup' %}" class="button-54">No, Go Back</a>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load static %}
+<html>
+    <head>
+        <title>Cat Cafe</title>
+        <link rel="stylesheet" href="https://cs-people.bu.edu/ucha/static/styles-project.css">
+    </head>
+    <body>
+        <!-- Navigation Links -->
+        <div class="header">
+            <a href="{% url 'homepage' %}" class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/220/220124.png" width="30px">
+                Coffee and Cats Cafe
+            </a>
+            <div class="header-nav">
+                <a href="{% url 'menu' %}">Menu</a>
+                <a href="{% url 'show_all_cats' %}">Meet the Cats</a>
+                <a href="{% url 'reservation' %}">Reserve Now</a>
+                <a href="{% url 'adoption_form' %}">Adopt</a>
+                
+            </div>
+        </div>
+    {% block content %}
+    {% endblock %}    
+  
+    </body>
+</html>

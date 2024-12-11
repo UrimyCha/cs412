@@ -1,0 +1,23 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button-54">Find Reservations</button>
+</form>
+{% if reservations %}
+    <h2>Reservations for {{ customer.first_name }} {{ customer.last_name }}</h2>
+    <ul>
+        {% for reservation in reservations %}
+            <li>
+                {{ reservation.customer }}  |   {{ reservation.reservation_date }}  |   {{ reservation.reservation_time }}  | {{reservation.party_size}}
+                <a href="{% url 'update_reservation' reservation.pk %}" class="button-54">Edit</a> 
+                <a href="{% url 'delete_reservation' reservation.pk %}" class="button-54">Cancel</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+<h2>No reservations found</h2>
+{% endif %}
+{% endblock %}

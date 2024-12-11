@@ -1,0 +1,12 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Reservation Confirmed!</h1>
+    <p>Thank you for making a reservation at our Café. Here are your details:</p>
+    <ul>
+        <li>Reservation Date: {{ reservation.reservation_date }}</li>
+        <li>Reservation Time: {{ reservation.reservation_time }}</li>
+        <li>Party Size: {{ reservation.party_size }}</li>
+    </ul>
+    <a href="{% url 'reservation' %}" class="button-54">Make another reservation</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Meet Our Cats!</h2>
+<div class="container">
+    {% include "project/filter.html" %}    
+</div>
+
+<main class="grid-container"> 
+{% for cat in cats %}
+<div>
+    <a href="{% url 'cat_detail' cat.pk %}">
+        <div class="crop">
+            <img class="crop" src="{{cat.get_profile_img.image.url}}">
+        </div>
+    </a>  
+    <div class="cats">
+        <a href="{% url 'cat_detail' cat.pk %}">
+            <h4>{{cat.name}}</h4>
+        </a>
+    </div>
+</div> 
+
+
+{% endfor %}
+
+</main>
+
+{% endblock %}

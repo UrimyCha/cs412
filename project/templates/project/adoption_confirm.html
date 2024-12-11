@@ -1,0 +1,16 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Adoption Application Submitted!</h1>
+    <p>Thank you for taking the time to fill out our application. Here are your details:</p>
+    <ul>
+        <li>Application Date: {{ adoption.application_date }}</li>
+        <li>Name: {{ adoption.customer }} </li>
+        <li>Address: {{ adoption.address}}</li>
+        <li>Pets: {{ adoption.other_pets_num }}</li>
+        <li>Children: {{ adoption.children_num }}</li>
+        <li>Household Size: {{ adoption.household_size }}</li>
+
+    </ul>
+    <a href="{% url 'homepage' %}">Home</a>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<main class="profile-container">
+    <div>
+        <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+        <p>contact: {{profile.email}}</p>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Edit Reservation</th>
+            </tr>
+            {% for p in profile.get_reservations %}
+            <tr>
+                <td> {{p.reservation_date}} </td>
+                <td> {{p.reservation_time}} </td>
+                <td> {{p.status}} </td>
+                <td> 
+                    <a href="{% url 'update_reservation' p.pk%}">Update</a> 
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </table>
+    </div>
+</main>
+
+{% endblock %}

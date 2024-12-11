@@ -1,0 +1,69 @@
+<table>
+    <form action="{% url 'show_all_cats' %}">
+        <tr>
+            <th>Select Min Age (Yrs)</th>
+            <td>
+                <select name="min_age">
+                    <option value="" selected disabled hidden>Choose</option>
+                    <option value=0>Kitten</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                </select>
+            </td>
+
+            <th>Select Max Age (Yrs)</th>
+            <td>
+                <select name="max_age">
+                    <option value="" selected disabled hidden>Choose</option>
+                    <option value=0>Kitten</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                    <option value=16>Elderly (11+)</option>
+                </select>
+            </td>
+
+            <th>Personality</th>
+            <td>
+                <input type="checkbox" name="shy" value="shy">Shy<br>
+                <input type="checkbox" name="cuddly" value="cuddly">Cuddly<br>
+                <input type="checkbox" name="playful" value="playful">Playful<br>
+                <input type="checkbox" name="goofy" value="goofy">Goofy<br>
+                <input type="checkbox" name="sweet" value="sweet">Sweet<br>
+                <input type="checkbox" name="chill" value="sweet">Chill<br>
+                <input type="checkbox" name="talkative" value="sweet">Talkative<br>
+            </td>
+
+            <th>Adoption Status</th>
+            <td>
+                <select name="adoptable">
+                    <option value="" selected disabled hidden>Choose</option>
+                    <option value=True>Adoptable</option>
+                    <option value=False>Permanent Resident</option>
+
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Apply Filters">
+            <form action="{% url 'show_all_cats' %}">
+                <input type="submit" value="Clear Filters">
+            </form>
+            </td>
+        </tr>
+    </form>
+</table>

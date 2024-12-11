@@ -1,0 +1,13 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h2>Update Reservation</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button-54">Save Changes</button>
+</form>
+<a href="{% url 'reservation_lookup' %}" class="button-54">Back</a>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h2>{{cat.name}}</h2>
+<table>
+    <tr>
+        <th>Age: </th>
+        <td>{{cat.age}}</td>
+    </tr>
+    <tr>
+        <th>Personality: </th>
+        <td>{{cat.personality_traits}}</td>
+    </tr>
+    <tr>
+        <th>Adoption Status: </th>
+        <td>
+            {% if cat.adoptable == False %}
+            Permanant Resident
+            {% else %}
+            Up for Adoption!
+            {% endif %}
+        </td>
+    </tr></table>
+
+
+<div>
+    <h3>Gallery</h3>
+    {% for img in cat.get_images %}
+        <img src="{{ img.image.url }}" width="200">
+    {% endfor %}
+</div>
+
+{% endblock %}

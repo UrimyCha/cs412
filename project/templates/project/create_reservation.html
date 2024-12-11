@@ -1,0 +1,40 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<main class="profile-container">
+    <div>
+        <h1 style="text-align: center;">Make a Reservation</h1>
+        <form method="post" action="{% url 'reservation' %}">
+        {% csrf_token %}
+
+        <table>
+            {% for field in form %}
+            <tr>
+                <th>{{field.label}} </th>
+                <td> {{field}} </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <div style="text-align: center;">
+            <button type="submit" class="button-54">Book Now</button>
+        </form>
+            <form action="{% url 'homepage'%}">
+                <button type="submit" class="button-54">Cancel</button>
+            </form>
+
+        </div> 
+    </div>
+    <div>
+        <h1 style="text-align: center;">Already Made a Reservation?</h1>
+        <div class="container">
+            <a href="{% url 'reservation_lookup' %}" class="button-54">Look Up Reservation</a>
+        </div>
+    </div>
+
+</main>
+
+
+
+
+{% endblock %}
